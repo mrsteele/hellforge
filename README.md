@@ -2,6 +2,21 @@
 
 This is an example, but useful for experimentation.
 
+### API Resources
+
+The following is the beginnings of a list of things we may want to support in an API. Pretty much anything inside of the patchd2.mpq:
+* Character Classes
+  * Skills
+  * Stats
+* Items
+  * Quality
+  * Types
+  * Properties
+* Monsters
+* Waypoints
+* Quests
+* ...and many more
+
 ### Resources
 
 * https://diablo2.diablowiki.net/Item_Generation_Tutorial - A list of where I could find ids for things if I needed them.
