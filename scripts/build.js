@@ -7,6 +7,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const getDir = (relative) => path.resolve(__dirname, relative)
 
+const idsByFile = {
+  charstats: 'class'
+}
+
 const mkdir = async (path) => {
   try {
     await fs.mkdir(getDir(path))
@@ -35,10 +39,11 @@ const run = async () => {
 
   // delete everything to start...
   try {
-    await rmdir(getDir('../dist', {
+    await fs.rmdir(getDir('../dist'), {
       recursive: true
-    }))
+    })
   } catch (err) {
+    console.log('err', err)
     // first time
   }
 
@@ -46,9 +51,29 @@ const run = async () => {
   await mkdir('../dist')
   await mkdir('../dist/api')
 
-  // copy files...
+  // dump the data
+  const allFileNames = []
   const filenames = Object.keys(db)
-  const htmlFileList = filenames.map(filename => `
+  for (let i = 0; i < filenames.length; i++) {
+    const filename = filenames[i]
+    const data = db[filename]
+    allFileNames.push(filename)
+    await mkdir(`../dist/api/${filename}`)
+    await fs.writeFile(getDir(`../dist/api/${filename}/index`), JSON.stringify(data, null, 2))
+
+    const id = idsByFile[filename]
+    if (id) {
+      await mkdir(`../dist/api/${filename}`)
+      for (let j = 0; j < data.length; j++) {
+        const subfile = `${filename}/${data[j][id].toLowerCase()}`
+        allFileNames.push(subfile)
+        await fs.writeFile(getDir(`../dist/api/${subfile}`), JSON.stringify(data[j], null, 2))
+      }
+    }
+  }
+
+  // copy files...
+  const htmlFileList = allFileNames.sort().map(filename => `
   <li>
     <a href='/api/${filename}' target='_blank'>/api/${filename}</a>
   </li>`).join('\n')
@@ -62,12 +87,6 @@ const run = async () => {
     }
   } catch (err) {
     console.error(err)
-  }
-
-  // dump the data
-  for (let i = 0; i < filenames.length; i++) {
-    const file = filenames[i]
-    await fs.writeFile(getDir(`../dist/api/${file}`), JSON.stringify(db[file], null, 2))
   }
 }
 
