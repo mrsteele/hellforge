@@ -1,23 +1,13 @@
 {
   "name": "d2api",
   "version": "1.0.0",
-  "description": "A simple api service to fetch information on diablo 2 information ",
-  "main": "index.js",
+  "type": "module",
+  "description": "A simple api service to fetch information on diablo 2 information",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "export": "next export",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "node scripts/build"
   },
   "author": "Matthew Steele <hi@mrsteele.dev>",
-  "dependencies": {
-    "next": "^11.1.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
-  },
   "devDependencies": {
-    "@types/react": "^17.0.20",
-    "typescript": "^4.4.3"
+    "async-csv": "^2.1.3"
   }
 }
