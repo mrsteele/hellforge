@@ -1,11 +1,10 @@
-import fs from 'fs/promises'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import csv from 'async-csv'
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const fs = require('fs/promises')
+const path = require('path')
+const csv = require('async-csv')
 
 const getDir = (relative) => path.resolve(__dirname, relative)
+
+const buildDir = '../public'
 
 // disabling for now...
 const idsByFile = {
@@ -39,15 +38,16 @@ const run = async () => {
   const db = {}
 
   try {
-    const files = await fs.opendir(getDir('../d2files'))
-    for await (const file of files) {
-      const rawContents = await fs.readFile(getDir(`../d2files/${file.name}`), 'utf8')
+    const files = await fs.readdir(getDir('../d2files'))
+
+    for (const file of files) {
+      const rawContents = await fs.readFile(getDir(`../d2files/${file}`), 'utf8')
       const data = await csv.parse(rawContents, {
         delimiter: '\t',
         columns: true
       })
 
-      db[fileNameCleaner(path.parse(file.name).name)] = data
+      db[fileNameCleaner(path.parse(file).name)] = data
     }
   } catch (err) {
     console.error(err)
@@ -55,7 +55,7 @@ const run = async () => {
 
   // delete everything to start...
   try {
-    await fs.rmdir(getDir('../dist'), {
+    await fs.rmdir(getDir(buildDir), {
       recursive: true
     })
   } catch (err) {
@@ -64,8 +64,8 @@ const run = async () => {
   }
 
   // setup directory
-  await mkdir('../dist')
-  await mkdir('../dist/api')
+  await mkdir(buildDir)
+  await mkdir(`${buildDir}/api`)
 
   // dump the data
   const allFileNames = []
@@ -74,35 +74,35 @@ const run = async () => {
     const filename = filenames[i]
     const data = db[filename]
     allFileNames.push(`${filename}.json`)
-    await fs.writeFile(getDir(`../dist/api/${filename}.json`), JSON.stringify(data, null, 2))
+    await fs.writeFile(getDir(`${buildDir}/api/${filename}.json`), JSON.stringify(data, null, 2))
 
     const id = idsByFile[filename]
     if (id) {
-      await mkdir(`../dist/api/${filename}`)
+      await mkdir(`${buildDir}/api/${filename}`)
       for (let j = 0; j < data.length; j++) {
         const subfile = `${filename}/${fileNameCleaner(data[j][id])}`
         allFileNames.push(`${subfile}.json`)
-        await fs.writeFile(getDir(`../dist/api/${subfile}.json`), JSON.stringify(data[j], null, 2))
+        await fs.writeFile(getDir(`${buildDir}/api/${subfile}.json`), JSON.stringify(data[j], null, 2))
       }
     }
   }
 
   // copy files...
-  const htmlFileList = allFileNames.sort().map(filename => `
-  <li>
-    <a href='/api/${filename}' target='_blank'>/api/${filename}</a>
-  </li>`).join('\n')
-  try {
-    const files = await fs.opendir(getDir('../copy'))
-    for await (const file of files) {
-      const rawContents = await fs.readFile(getDir(`../copy/${file.name}`), 'utf8')
-      const newRawContents = rawContents.replace('{{LINKS}}', htmlFileList)
+  // const htmlFileList = allFileNames.sort().map(filename => `
+  // <li>
+  //   <a href='/api/${filename}' target='_blank'>/api/${filename}</a>
+  // </li>`).join('\n')
+  // try {
+  //   const files = await fs.opendir(getDir('../copy'))
+  //   for await (const file of files) {
+  //     const rawContents = await fs.readFile(getDir(`../copy/${file.name}`), 'utf8')
+  //     const newRawContents = rawContents.replace('{{LINKS}}', htmlFileList)
 
-      await fs.writeFile(getDir(`../dist/${file.name}`), newRawContents)
-    }
-  } catch (err) {
-    console.error(err)
-  }
+  //     await fs.writeFile(getDir(`${buildDir}/${file.name}`), newRawContents)
+  //   }
+  // } catch (err) {
+  //   console.error(err)
+  // }
 }
 
 run()
