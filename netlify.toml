@@ -3,4 +3,6 @@
   [headers.values]
     Content-Type = "application/json"
 [[redirects]]
-  /api/*  /api/:spat/index.json 200!
+  from = "/api/*"
+  to = "/api/:spat/index.json"
+  status = "200!"
