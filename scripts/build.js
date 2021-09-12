@@ -8,8 +8,21 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const getDir = (relative) => path.resolve(__dirname, relative)
 
 const idsByFile = {
-  charstats: 'class'
+  charstats: 'class',
+  difficultylevels: 'Name',
+  elemtypes: 'Code',
+  events: 'event',
+  expansionstring: 'A4Q2ExpansionSuccessTyrael',
+  experience: 'Level',
+  gems: 'code',
+  inventory: 'class',
+  itemstatcost: 'Stat'
 }
+
+const fileNameCleaner = (name) => (name || 'BLANK')
+  .split(' ').join('-')
+  .split('/').join('-')
+  .toLowerCase()
 
 const mkdir = async (path) => {
   try {
@@ -31,7 +44,7 @@ const run = async () => {
         columns: true
       })
 
-      db[path.parse(file.name).name.toLowerCase()] = data
+      db[fileNameCleaner(path.parse(file.name).name)] = data
     }
   } catch (err) {
     console.error(err)
@@ -65,7 +78,7 @@ const run = async () => {
     if (id) {
       await mkdir(`../dist/api/${filename}`)
       for (let j = 0; j < data.length; j++) {
-        const subfile = `${filename}/${data[j][id].toLowerCase()}`
+        const subfile = `${filename}/${fileNameCleaner(data[j][id])}`
         allFileNames.push(`${subfile}.json`)
         await fs.writeFile(getDir(`../dist/api/${subfile}.json`), JSON.stringify(data[j], null, 2))
       }
