@@ -89,7 +89,7 @@ const run = async () => {
 
   // copy files...
   try {
-    await fs.writeFile(path.resolve(__dirname, buildDir, '../'), `module.exports = {
+    await fs.writeFile(path.resolve(__dirname, buildDir, '../', 'next.config.js'), `module.exports = {
       serverRuntimeConfig: {
         files: ${JSON.stringify(allFileNames)}
       }
