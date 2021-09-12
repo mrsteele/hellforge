@@ -72,7 +72,7 @@ export default ({ files, dirname, error }) => (
 export async function getServerSideProps(context) {
   let files = []
   try {
-    files = await fs.readdir(path.resolve(getConfig().serverRuntimeConfig.PROJECT_ROOT, 'public/api2'))
+    files = await fs.readdir(path.resolve(getConfig().serverRuntimeConfig.PROJECT_ROOT, 'public/api'))
   } catch (err) {}
 
   return {
