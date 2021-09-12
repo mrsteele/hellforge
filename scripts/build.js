@@ -59,7 +59,7 @@ const run = async () => {
     const data = db[filename]
     allFileNames.push(filename)
     await mkdir(`../dist/api/${filename}`)
-    await fs.writeFile(getDir(`../dist/api/${filename}/index`), JSON.stringify(data, null, 2))
+    await fs.writeFile(getDir(`../dist/api/${filename}/index.json`), JSON.stringify(data, null, 2))
 
     const id = idsByFile[filename]
     if (id) {
