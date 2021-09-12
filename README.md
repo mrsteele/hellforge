@@ -2,6 +2,10 @@
 
 This is an example, but useful for experimentation.
 
+### Disclaimer
+
+To get the most accurate information, we use data from the actua game files. These files are the intellectual property of *Blizzard Entertainment* and I take no credit for the contents of them.
+
 ### API Resources
 
 The following is the beginnings of a list of things we may want to support in an API. Pretty much anything inside of the patchd2.mpq:
