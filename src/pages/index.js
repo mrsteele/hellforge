@@ -2,6 +2,7 @@ import styles from './index.module.scss'
 import Head from 'next/head'
 import fs from 'fs/promises'
 import path from 'path'
+import getConfig from 'next/config'
 
 export default ({ files, dirname, error }) => (
   <div className={styles.wrapper}>
@@ -65,29 +66,18 @@ export default ({ files, dirname, error }) => (
   
       <p>Code is from me and anyone who desires to <a href='https://github.com/mrsteele/d2api' target='_blank'>contribute</a>. The code is currently just using v1.13, and it is not complete but wouldn't mind a few more contributors.</p>
     </main>
-
-    <footer>Error: {error}</footer>
-    <footer>dirname: {dirname}</footer>
   </div>
 )
 
 export async function getServerSideProps(context) {
   let files = []
-  let error = {}
   try {
-    const root = __dirname.split('.next')[0]
-    console.log('root', root)
-    files = await fs.readdir(path.resolve(root, 'public/api2'))
-    console.log('files', files)
-  } catch (err) {
-    error = err.errno
-  }
+    files = await fs.readdir(path.resolve(getConfig().serverRuntimeConfig.PROJECT_ROOT, 'public/api2'))
+  } catch (err) {}
 
   return {
     props: {
-      dirname: __dirname,
-      files,
-      error
+      files
     }, // will be passed to the page component as props
   }
 }
