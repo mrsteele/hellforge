@@ -70,7 +70,9 @@ export default ({ files }) => (
 
 export async function getServerSideProps(context) {
   const root = __dirname.split('.next')[0]
+  console.log('root', root)
   const files = await fs.readdir(path.resolve(root, 'public/api'))
+  console.log('files', files)
 
   return {
     props: {
