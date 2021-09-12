@@ -47,23 +47,27 @@ const run = async () => {
   await mkdir('../dist/api')
 
   // copy files...
+  const filenames = Object.keys(db)
+  const htmlFileList = filenames.map(filename => `
+  <li>
+    <a href='/api/${filename}' target='_blank'></a>
+  </li>`).join('\n')
   try {
     const files = await fs.opendir(getDir('../copy'))
     for await (const file of files) {
-      await fs.copyFile(
-        path.resolve(__dirname, `../copy/${file.name}`),
-        path.resolve(__dirname, `../dist/${file.name}`)
-      )
+      const rawContents = await fs.readFile(getDir(`../copy/${file.name}`), 'utf8')
+      const newRawContents = rawContents.replace('{{LINKS}}', htmlFileList)
+
+      await fs.writeFile(getDir(`../dist/${file.name}`), newRawContents)
     }
   } catch (err) {
     console.error(err)
   }
 
   // dump the data
-  const files = Object.keys(db)
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i]
-    await fs.writeFile(getDir(`../dist/api/${file}.json`), JSON.stringify(db[file]))
+  for (let i = 0; i < filenames.length; i++) {
+    const file = filenames[i]
+    await fs.writeFile(getDir(`../dist/api/${file}`), JSON.stringify(db[file]))
   }
 }
 
