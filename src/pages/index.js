@@ -66,22 +66,21 @@ export default ({ files, dirname, error }) => (
       <p>Code is from me and anyone who desires to <a href='https://github.com/mrsteele/d2api' target='_blank'>contribute</a>. The code is currently just using v1.13, and it is not complete but wouldn't mind a few more contributors.</p>
     </main>
 
-    <footer>error: {error}</footer>
-    <pre>{JSON.stringify(error, null, 2)}</pre>
+    <footer>Error: {error}</footer>
     <footer>dirname: {dirname}</footer>
   </div>
 )
 
 export async function getServerSideProps(context) {
   let files = []
-  let error = ''
+  let error = {}
   try {
     const root = __dirname.split('.next')[0]
     console.log('root', root)
-    files = await fs.readdir(path.resolve(root, 'public/api'))
+    files = await fs.readdir(path.resolve(root, 'public/api2'))
     console.log('files', files)
   } catch (err) {
-    error = err
+    error = err.errno
   }
 
   return {
