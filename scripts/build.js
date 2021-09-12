@@ -50,7 +50,7 @@ const run = async () => {
   const filenames = Object.keys(db)
   const htmlFileList = filenames.map(filename => `
   <li>
-    <a href='/api/${filename}' target='_blank'></a>
+    <a href='/api/${filename}' target='_blank'>/api/${filename}</a>
   </li>`).join('\n')
   try {
     const files = await fs.opendir(getDir('../copy'))
