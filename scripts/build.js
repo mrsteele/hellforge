@@ -16,7 +16,9 @@ const idsByFile = {
   experience: 'Level',
   gems: 'code',
   inventory: 'class',
-  itemstatcost: 'Stat'
+  itemstatcost: 'Stat', // ['Stat', ID'] : can we do an array here? That way we can have multiples...
+  levels: 'Id',
+
 }
 
 const fileNameCleaner = (name) => (name || 'BLANK')
@@ -71,7 +73,6 @@ const run = async () => {
     const filename = filenames[i]
     const data = db[filename]
     allFileNames.push(`${filename}.json`)
-    await mkdir(`../dist/api/${filename}`)
     await fs.writeFile(getDir(`../dist/api/${filename}.json`), JSON.stringify(data, null, 2))
 
     const id = idsByFile[filename]
