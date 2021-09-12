@@ -3,7 +3,7 @@ import Head from 'next/head'
 import fs from 'fs/promises'
 import path from 'path'
 
-export default ({ files, dirname }) => (
+export default ({ files, dirname, error }) => (
   <div className={styles.wrapper}>
     <Head>
       <script src="https://kit.fontawesome.com/c0cb21dcb7.js" crossorigin="anonymous" />
@@ -66,23 +66,29 @@ export default ({ files, dirname }) => (
       <p>Code is from me and anyone who desires to <a href='https://github.com/mrsteele/d2api' target='_blank'>contribute</a>. The code is currently just using v1.13, and it is not complete but wouldn't mind a few more contributors.</p>
     </main>
 
+    <footer>error: {error}</footer>
+    <pre>{JSON.stringify(error, null, 2)}</pre>
     <footer>dirname: {dirname}</footer>
   </div>
 )
 
 export async function getServerSideProps(context) {
   let files = []
+  let error = ''
   try {
     const root = __dirname.split('.next')[0]
     console.log('root', root)
     files = await fs.readdir(path.resolve(root, 'public/api'))
     console.log('files', files)
-  } catch (err) {}
+  } catch (err) {
+    error = err
+  }
 
   return {
     props: {
       dirname: __dirname,
-      files
+      files,
+      error
     }, // will be passed to the page component as props
   }
 }
