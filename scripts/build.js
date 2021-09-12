@@ -12,7 +12,6 @@ const idsByFile = {
   difficultylevels: 'Name',
   elemtypes: 'Code',
   events: 'event',
-  expansionstring: 'A4Q2ExpansionSuccessTyrael',
   experience: 'Level',
   gems: 'code',
   inventory: 'class',
@@ -24,6 +23,8 @@ const idsByFile = {
 const fileNameCleaner = (name) => (name || 'BLANK')
   .split(' ').join('-')
   .split('/').join('-')
+  .split('?').join('-')
+  .split('#').join('-')
   .toLowerCase()
 
 const mkdir = async (path) => {
