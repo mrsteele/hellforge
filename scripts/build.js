@@ -67,7 +67,7 @@ const run = async () => {
   // dump the data
   for (let i = 0; i < filenames.length; i++) {
     const file = filenames[i]
-    await fs.writeFile(getDir(`../dist/api/${file}`), JSON.stringify(db[file]))
+    await fs.writeFile(getDir(`../dist/api/${file}`), JSON.stringify(db[file], null, 2))
   }
 }
 
