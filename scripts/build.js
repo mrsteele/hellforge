@@ -57,18 +57,17 @@ const run = async () => {
   for (let i = 0; i < filenames.length; i++) {
     const filename = filenames[i]
     const data = db[filename]
-    allFileNames.push(`${filename}`)
+    allFileNames.push(`${filename}.json`)
     await mkdir(`../dist/api/${filename}`)
-    await fs.writeFile(getDir(`../dist/api/${filename}/index.json`), JSON.stringify(data, null, 2))
+    await fs.writeFile(getDir(`../dist/api/${filename}.json`), JSON.stringify(data, null, 2))
 
     const id = idsByFile[filename]
     if (id) {
       await mkdir(`../dist/api/${filename}`)
       for (let j = 0; j < data.length; j++) {
         const subfile = `${filename}/${data[j][id].toLowerCase()}`
-        allFileNames.push(`${subfile}`)
-        await mkdir(`../dist/api/${subfile}`)
-        await fs.writeFile(getDir(`../dist/api/${subfile}/index.json`), JSON.stringify(data[j], null, 2))
+        allFileNames.push(`${subfile}.json`)
+        await fs.writeFile(getDir(`../dist/api/${subfile}.json`), JSON.stringify(data[j], null, 2))
       }
     }
   }

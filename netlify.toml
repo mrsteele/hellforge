@@ -1,8 +1,0 @@
-[[headers]]
-  for = "/api/*"
-  [headers.values]
-    Content-Type = "application/json"
-[[redirects]]
-  from = "/api/*"
-  to = "/api/:spat/index.json"
-  status = "200!"
