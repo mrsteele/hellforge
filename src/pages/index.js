@@ -1,7 +1,5 @@
 import styles from './index.module.scss'
 import Head from 'next/head'
-import fs from 'fs/promises'
-import path from 'path'
 import getConfig from 'next/config'
 
 export default ({ files, dirname, error }) => (
@@ -70,14 +68,9 @@ export default ({ files, dirname, error }) => (
 )
 
 export async function getServerSideProps(context) {
-  let files = []
-  try {
-    files = await fs.readdir(path.resolve(getConfig().serverRuntimeConfig.PROJECT_ROOT, 'public/api'))
-  } catch (err) {}
-
   return {
     props: {
-      files
+      files: getConfig().serverRuntimeConfig.files
     }, // will be passed to the page component as props
   }
 }

@@ -88,21 +88,16 @@ const run = async () => {
   }
 
   // copy files...
-  // const htmlFileList = allFileNames.sort().map(filename => `
-  // <li>
-  //   <a href='/api/${filename}' target='_blank'>/api/${filename}</a>
-  // </li>`).join('\n')
-  // try {
-  //   const files = await fs.opendir(getDir('../copy'))
-  //   for await (const file of files) {
-  //     const rawContents = await fs.readFile(getDir(`../copy/${file.name}`), 'utf8')
-  //     const newRawContents = rawContents.replace('{{LINKS}}', htmlFileList)
-
-  //     await fs.writeFile(getDir(`${buildDir}/${file.name}`), newRawContents)
-  //   }
-  // } catch (err) {
-  //   console.error(err)
-  // }
+  try {
+    await fs.writeFile(path.resolve(__dirname, buildDir, '../'), `module.exports = {
+      serverRuntimeConfig: {
+        files: ${JSON.stringify(allFileNames)}
+      }
+    }
+`)
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 run()
