@@ -45,10 +45,19 @@ const run = async () => {
   // setup directory
   await mkdir('../dist')
   await mkdir('../dist/api')
-  await fs.copy(
-    path.resolve(__dirname, '../copy'),
-    path.resolve(__dirname, '../dist')
-  )
+
+  // copy files...
+  try {
+    const files = await fs.opendir(getDir('../copy'))
+    for await (const file of files) {
+      await fs.copyFile(
+        path.resolve(__dirname, `../copy/${file.name}`),
+        path.resolve(__dirname, `../dist/${file.name}`)
+      )
+    }
+  } catch (err) {
+    console.error(err)
+  }
 
   // dump the data
   const files = Object.keys(db)
