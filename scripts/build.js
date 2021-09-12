@@ -7,17 +7,17 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const getDir = (relative) => path.resolve(__dirname, relative)
 
+// disabling for now...
 const idsByFile = {
-  charstats: 'class',
-  difficultylevels: 'Name',
-  elemtypes: 'Code',
-  events: 'event',
-  experience: 'Level',
-  gems: 'code',
-  inventory: 'class',
-  itemstatcost: 'Stat', // ['Stat', ID'] : can we do an array here? That way we can have multiples...
-  levels: 'Id',
-
+  // charstats: 'class',
+  // difficultylevels: 'Name',
+  // elemtypes: 'Code',
+  // events: 'event',
+  // experience: 'Level',
+  // gems: 'code',
+  // inventory: 'class',
+  // itemstatcost: 'Stat', // ['Stat', ID'] : can we do an array here? That way we can have multiples...
+  // levels: 'Id',
 }
 
 const fileNameCleaner = (name) => (name || 'BLANK')
