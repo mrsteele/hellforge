@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: #222;
+  color: #eee;
+  font-family:Arial, Helvetica, sans-serif;
+  line-height: 1.5em;
+}
+
+h1, h2, p {
+  margin-bottom: 0.8em;
+}
+
+main {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+a {
+  color: inherit;
+}
