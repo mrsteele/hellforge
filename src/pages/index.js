@@ -2,14 +2,14 @@ import styles from './index.module.scss'
 import Head from 'next/head'
 import getConfig from 'next/config'
 
-export default ({ files, dirname, error }) => (
+export default ({ files }) => (
   <div className={styles.wrapper}>
     <Head>
       <script src="https://kit.fontawesome.com/c0cb21dcb7.js" crossorigin="anonymous" />
     </Head>
     <header>
       <div className={`${styles.container} ${styles.flex}`} style={{justifyContent: 'space-between'}}>
-        <h1>D2(R) API <small>(Unofficial)</small></h1>
+        <h1>D2(R) API <small>(Unofficial) <span style={{color: 'red'}}>(alpha)</span></small></h1>
         <div>
           <a href='https://github.com/mrsteele/d2api' target='_blank'>
             <i className="fab fa-github"></i>
