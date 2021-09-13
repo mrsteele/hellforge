@@ -44,6 +44,10 @@ const Page = ({ files }) => (
     
     <p>These have been translated into something more human-readable (Work-In-Progress).</p>
     
+    <h3>GraphQL</h3>
+    
+    <p>You can get access to GraphQL by going to the following: <a href='/api/v2/graphql' target='_blank'>{process.env.VERCEL_URL}/api/v2/graphql</a></p>
+    
     <h3>Models</h3>
 
     <p>The following models are below.</p>

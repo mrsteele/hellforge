@@ -10,7 +10,7 @@ const Page = () => (
 
     <h3>v1 API</h3>
 
-    <p>The v1 API is the first pass at converting the data files to JSON. The API Docs can be found <Link href='/docs/api'>here</Link>.</p>
+    <p>The v1 API is the first pass at converting the data files to JSON. The API Docs can be found <Link href='/docs/v1'>here</Link>.</p>
   
     <h3>v2 API</h3>
 

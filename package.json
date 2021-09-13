@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A simple api service to fetch information on diablo 2 information",
   "scripts": {
-    "prebuild": "node scripts/build",
     "dev": "next dev",
     "build": "next build",
     "export": "next export",
@@ -13,6 +12,7 @@
   "author": "Matthew Steele <hi@mrsteele.dev>",
   "devDependencies": {
     "async-csv": "^2.1.3",
+    "raw-loader": "^4.0.2",
     "sass": "^1.39.2"
   },
   "dependencies": {

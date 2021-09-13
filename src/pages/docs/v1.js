@@ -1,5 +1,6 @@
 import getConfig from 'next/config'
 import ListApi from 'components/ListApi'
+import raw from 'lib/raw'
 
 export default ({ files, files2 }) => (
   <div>
@@ -13,8 +14,8 @@ export default ({ files, files2 }) => (
 export async function getServerSideProps(context) {
   return {
     props: {
-      files: getConfig().serverRuntimeConfig.files.map(path => ({
-        path: `/${path}`
+      files: Object.keys(raw).map(r => ({
+        path: `/v1/${r}`
       }))
     }, // will be passed to the page component as props
   }
