@@ -18,7 +18,7 @@ const models = [{
 }, {
   title: 'ItemProperty',
   description: 'An individual property that can be added to magical items.',
-  route: '/items/properties/:id',
+  route: '/items/properties(/:id)',
   properties: [{
     name: 'id',
     type: 'String',
@@ -40,7 +40,7 @@ const models = [{
 
 export default ({ files }) => (
   <div>
-    <h2>v2 API</h2>
+    <h2>v2 API <span style={{color: 'red'}}>(WIP)</span></h2>
     
     <p>These have been translated into something more human-readable (Work-In-Progress).</p>
     

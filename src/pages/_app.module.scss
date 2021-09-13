@@ -28,6 +28,10 @@
   }
 
   footer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2em;
+
     .social {
       a {
         font-size: 2em;
