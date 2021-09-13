@@ -18,7 +18,6 @@ files [Function: webpackContext] {
 */
 // console.log('data', data[Object.keys(data)[0]])
 // console.log('keys', Object.keys(data))
-console.log('TTTTTTTTT', Object.keys(data))
 
 
 
