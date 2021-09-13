@@ -38,7 +38,7 @@ Item (Fragment)
 - defense: Range
 - durability: Range
 - graphics: {
-    inventory: [String] (maybe more than one like rings?)
+  - inventory: [String] (maybe more than one like rings?)
 }
 - properties: [ItemProperty]
 
