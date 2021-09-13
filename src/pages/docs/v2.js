@@ -38,7 +38,7 @@ const models = [{
   }]
 }]
 
-export default ({ files }) => (
+const Page = ({ files }) => (
   <div>
     <h2>v2 API <span style={{color: 'red'}}>(WIP)</span></h2>
     
@@ -55,6 +55,8 @@ export default ({ files }) => (
 
   </div>
 )
+
+export default Page
 
 export async function getServerSideProps(context) {
   const uniqueitems = await fetch('/api/v2/items/unique')
