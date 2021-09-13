@@ -23,7 +23,7 @@ export default ({ test }) => (
 )
 
 export async function getServerSideProps() {
-  const test = 'process.env.NEXT_PUBLIC_SITE_URL'
+  const test = process.env.NEXT_PUBLIC_SITE_URL
   return {
     props: {
       test
