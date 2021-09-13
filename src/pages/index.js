@@ -22,8 +22,8 @@ export default ({ test }) => (
   </div>
 )
 
-export async function getServerSideProps(context) {
-  const test = process.env.NEXT_PUBLIC_SITE_URL
+export async function getServerSideProps() {
+  const test = 'process.env.NEXT_PUBLIC_SITE_URL'
   return {
     props: {
       test
