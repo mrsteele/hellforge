@@ -13,7 +13,7 @@ const transform = (row) => {
     // enabled?
     availableOnLadder: row.ladder === 1,
     canDropMoreThanOncePerGame: !!row.nolimit,
-    itemLvl: row.lvl,
+    itemLvl: row.lvl || null,
     requiredLevel: row["lvl req"],
     type: row.code, // TODO: Map this to Weapons.txt, Armor.txt and Misc.txt
     // ALSO TODO: Maybe make an `/api/items` endpoint, then `/api/items/armor` and so on
