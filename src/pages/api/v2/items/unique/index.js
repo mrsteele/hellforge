@@ -43,6 +43,6 @@ const transform = (row) => {
 }
 
 export default async function handler(req, res) {
-  const file = await fetch(`/api/uniqueitems.json`)
+  const file = await fetch(`/api/v1/uniqueitems.json`)
   res.status(200).json(file.map(row => transform(row)))
 }

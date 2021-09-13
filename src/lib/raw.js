@@ -1,7 +1,39 @@
-import armor from 'd2files/Armor.txt'
+const filenames = [
+  'Armor',
+  'Books',
+  'CharStats',
+  'CompCode',
+  'CubeMain',
+  'DifficultyLevels',
+  'ElemTypes',
+  'Events',
+  'expansionstring',
+  'Experience',
+  'Gems',
+  'Hireling',
+  'Inventory',
+  'ItemRatio',
+  'ItemStatCost',
+  'ItemTypes',
+  'Levels',
+  'LvlMaze',
+  'LvlPrest',
+  'LvlSub',
+  'LvlTypes',
+  'MagicPrefix',
+  'MagicSuffix',
+  'merged',
+  'Misc',
+  'MissCalc',
+  'MonAi',
+  'MonEquip',
+  'MonLvl',
+  'MonMode'
+]
 
-const files = {
-  armor
-}
+const data = filenames.reduce((all, file) => {
+  all[file.toLowerCase()] = require(`d2files/${file}.txt`).default
+  return all
+}, {})
 
-export default files
+export default data
