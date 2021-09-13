@@ -1,4 +1,4 @@
-export default ({ test }) => (
+const Page = ({ test }) => (
   <div>
     <h2>About</h2>
 
@@ -21,3 +21,5 @@ export default ({ test }) => (
     <p>test {test}</p>
   </div>
 )
+
+export default Page

@@ -2,7 +2,7 @@ import getConfig from 'next/config'
 import ListApi from 'components/ListApi'
 import raw from 'lib/raw'
 
-export default ({ files, files2 }) => (
+const Page = ({ files, files2 }) => (
   <div>
     <h2>v1 API</h2>
     
@@ -10,6 +10,8 @@ export default ({ files, files2 }) => (
     <ListApi items={files} />
   </div>
 )
+
+export default Page
 
 export async function getServerSideProps(context) {
   return {

@@ -42,4 +42,25 @@ export const typeDefs = gql`
     getUniques: [Unique]
     getUnique(id: ID!): Unique!
   }
+
+  type Item {
+    id: ID
+    type: String # (ring, armor, etc...)
+    name: String
+    throwable: Boolean
+    stackable: Boolean - keys, knives, etc...
+    ethereal: Boolean
+    socketable: Boolean
+    lvl: Int
+    defense: Range
+    durability: Range
+  }
+
+  type Weapon implements Item {
+
+  }
+
+  type Armor implements Item {
+
+  }
 `
