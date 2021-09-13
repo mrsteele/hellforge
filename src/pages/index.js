@@ -1,8 +1,22 @@
 import styles from './index.module.scss'
 import Head from 'next/head'
 import getConfig from 'next/config'
+import fetch from 'lib/fetch'
 
-export default ({ files }) => (
+const ListApi = ({ items }) => (
+  <ul>
+  {items.map(item => (
+    <li>
+      <a href={item.path} target='_blank'>{item.path}</a>
+      {item.items?.length > 0 && (
+        <ListApi {...item} />
+      )}
+    </li>
+  ))}
+</ul>
+)
+
+export default ({ files, files2 }) => (
   <div className={styles.wrapper}>
     <Head>
       <script src="https://kit.fontawesome.com/c0cb21dcb7.js" crossorigin="anonymous" />
@@ -43,20 +57,13 @@ export default ({ files }) => (
       <h3>raw</h3>
       
       <p>These are raw from the tables provided by Blizzard.</p>
-      <ul>
-        {files.map(file => (
-        <li>
-          <a href={`/api/${file}`} target='_blank'>/api/{file}</a>
-        </li>
-        ))}
-      </ul>
+      <ListApi items={files} />
+
 
       <h3>v2</h3>
 
-      <p>These have been translated into something more human-readable.</p>
-      <ul>
-        <li>links 2 here</li>
-      </ul>
+      <p>These have been translated into something more human-readable (Work-In-Progress).</p>
+      <ListApi items={files2} />
   
       <h2>Legal/Disclaimer</h2>
   
@@ -68,9 +75,18 @@ export default ({ files }) => (
 )
 
 export async function getServerSideProps(context) {
+  const uniqueitems = await fetch('/api/v2/items/unique')
   return {
     props: {
-      files: getConfig().serverRuntimeConfig.files
+      files: getConfig().serverRuntimeConfig.files.map(path => ({
+        path: `/api/${path}`
+      })),
+      files2: [{
+        path: '/api/v2/items/unique',
+        items: uniqueitems.map(item => ({
+          path: `/api/v2/items/unique/${item.id}`
+        }))
+      }]
     }, // will be passed to the page component as props
   }
 }
