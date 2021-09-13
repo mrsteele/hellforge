@@ -1,26 +1,4 @@
-import getConfig from 'next/config'
-import Link from 'components/Link'
-import fetch from 'lib/fetch'
-
-const ListApi = ({ items }) => (
-  <ul>
-  {items.map(item => (
-    <li>
-      <a href={`/api${item.path}`} target='_blank'>/api{item.path}</a>
-      {item.page && (
-        <>
-          {` `}(<Link href={item.path}>Docs</Link>)
-        </>
-      )}
-      {item.items?.length > 0 && (
-        <ListApi {...item} />
-      )}
-    </li>
-  ))}
-</ul>
-)
-
-export default ({ files, files2 }) => (
+export default ({ test }) => (
   <div>
     <h2>About</h2>
 
@@ -39,23 +17,16 @@ export default ({ files, files2 }) => (
     <p>All the data comes from <em>Blizzard Entertainment</em> and belongs to them. I just wrote the script that scrubs that data.</p>
 
     <p>Code is from me and anyone who desires to <a href='https://github.com/mrsteele/d2api' target='_blank'>contribute</a>. The code is currently just using v1.13, and it is not complete but wouldn't mind a few more contributors.</p>
+
+    <p>test {test}</p>
   </div>
 )
 
 export async function getServerSideProps(context) {
-  const uniqueitems = await fetch('/api/v2/items/unique')
+  const test = process.env.NEXT_PUBLIC_SITE_URL
   return {
     props: {
-      files: getConfig().serverRuntimeConfig.files.map(path => ({
-        path: `/${path}`
-      })),
-      files2: [{
-        path: '/v2/items/unique',
-        page: true,
-        items: uniqueitems.map(item => ({
-          path: `/v2/items/unique/${item.id}`
-        }))
-      }]
+      test
     }, // will be passed to the page component as props
   }
 }
