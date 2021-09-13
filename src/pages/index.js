@@ -21,12 +21,3 @@ export default ({ test }) => (
     <p>test {test}</p>
   </div>
 )
-
-export async function getServerSideProps() {
-  const test = process.env.NEXT_PUBLIC_SITE_URL
-  return {
-    props: {
-      test
-    }, // will be passed to the page component as props
-  }
-}

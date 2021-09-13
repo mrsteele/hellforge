@@ -1,6 +1,6 @@
 const request = async (path) => {
-  const hostname = process.env.NEXT_PUBLIC_SITE_URL
-  const file = await fetch(`${hostname}${path}`).then(res => res.json())
+  const hostname = process.env.VERCEL_URL
+  const file = await fetch(`https://${hostname}${path}`).then(res => res.json())
   return file
 }
 
