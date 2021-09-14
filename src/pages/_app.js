@@ -12,8 +12,9 @@ function MyApp({ Component, pageProps }) {
       <header>
         <div className={`container flex`} style={{justifyContent: 'space-between'}}>
           <h1><Link href='/'>D2(R) API</Link> <small>(Unofficial) <span style={{color: 'red'}}>(alpha)</span></small></h1>
-          <nav>
-            <Link href='/docs'>Docs</Link>
+          <nav className={styles.nav}>
+            <Link href='/v1'>v1 (raw)</Link>
+            <Link href='/v2'>v2 (graphql)</Link>
           </nav>
         </div>
       </header>

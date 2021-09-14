@@ -1,6 +1,8 @@
 import ListApi from 'components/ListApi'
 import Model from 'components/Model'
 import fetch from 'lib/fetch'
+import Markdown from 'components/Markdown'
+import PageContent from 'markdown/v2.md'
 
 const models = [{
   title: 'Range',
@@ -40,19 +42,9 @@ const models = [{
 
 const Page = ({ files }) => (
   <div>
-    <h2>v2 API <span style={{color: 'red'}}>(WIP)</span></h2>
-    
-    <p>These have been translated into something more human-readable (Work-In-Progress).</p>
-    
-    <h3>GraphQL</h3>
-    
-    <p>You can get access to GraphQL by going to the following: <a href='/api/v2/graphql' target='_blank'>{process.env.VERCEL_URL}/api/v2/graphql</a></p>
-    
-    <h3>Models</h3>
+    <Markdown>{PageContent}</Markdown>
 
-    <p>The following models are below.</p>
-
-    {models.map(model => <Model {...model} />)}
+    {models.map((model, idx) => <Model key={idx} {...model} />)}
 
     <h3>Routes</h3>
     <ListApi items={files} />

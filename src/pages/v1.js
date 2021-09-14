@@ -1,12 +1,11 @@
-import getConfig from 'next/config'
-import ListApi from 'components/ListApi'
 import raw from 'lib/raw'
+import ListApi from 'components/ListApi'
+import Markdown from 'components/Markdown'
+import PageMarkdown from 'markdown/v1.md'
 
-const Page = ({ files, files2 }) => (
+const Page = ({ files }) => (
   <div>
-    <h2>v1 API</h2>
-    
-    <p>These are raw from the tables provided by Blizzard.</p>
+    <Markdown>{PageMarkdown}</Markdown>
     <ListApi items={files} />
   </div>
 )
