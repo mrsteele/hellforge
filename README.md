@@ -31,6 +31,7 @@ The following is the beginnings of a list of things we may want to support in an
 * https://github.com/fabd/diablo2/tree/master/code/d2_113_data - Some d2 data someone uploaded to Github.
 * https://d2mods.info/forum/kb/index - An explanation of all the files and what they mean.
 * https://user.xmission.com/~trevin/DiabloIIv1.09_Magic_Properties.shtml - All magic properties
+* https://github.com/blizzhackers/d2data/blob/master/compile.js - A better compiler
 
 ### License
 
