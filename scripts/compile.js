@@ -13,7 +13,7 @@
  const inDir = 'resources/d2files/';
  const outDir = 'src/';
  const files = fs.readdirSync(inDir).filter(fn => fn.slice(-4) === '.txt').map(fn => fn.slice(0, -4));
- 
+
  const indexes = {
    armor: 'code',
    ArmType: 'Token',
@@ -87,6 +87,10 @@
          expansion = true;
        } else if ((line = line.split(fieldEnd))) {
          let key = indexColumn >= 0 ? (line[indexColumn]) : index;
+
+        //  if (fn === 'charstats') {
+        //    key = charIds[key]
+        //  }
  
          if (key !== undefined) {
            if (key !== '') {

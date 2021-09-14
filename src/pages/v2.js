@@ -33,6 +33,8 @@ const getTypeType = (type) => {
 
 export async function getServerSideProps(context) {
   const uniqueitems = await fetch('/api/v2/items/unique')
+  const itemtypes = await fetch('/api/v2/items/types')
+  const characters = await fetch('/api/v2/characters')
 
   // USE THIS TO DO THE GRAPHQL!
   // console.log('typeDefs', typeDefs.definitions)
@@ -83,6 +85,16 @@ typeDefs [ { kind: 'ObjectTypeDefinition',
         path: '/v2/items/unique',
         items: uniqueitems.map(item => ({
           path: `/v2/items/unique/${item.id}`
+        }))
+      }, {
+        path: '/v2/items/types',
+        items: itemtypes.map(item => ({
+          path: `/v2/items/types/${item.id}`
+        }))
+      }, {
+        path: '/v2/characters',
+        items: characters.map(char => ({
+          path: `/v2/characters/${char.id}`
         }))
       }]
     }, // will be passed to the page component as props

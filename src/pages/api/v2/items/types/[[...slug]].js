@@ -4,7 +4,20 @@ const clean = (arr = []) => ([...new Set(arr.filter(a => !a))])
 
 const getBodyLocale = (l) => l || null
 
-const getClass = (id) => id || null
+
+// character ids
+const charIds = {
+  ama: 'Amazon',
+  bar: 'Barbarian',
+  nec: 'Necromancer',
+  pal: 'Paladin',
+  sor: 'Sorceress',
+  ass: 'Assassin',
+  dru: 'Druid',
+  '': 'Expansion'
+}
+
+const getClass = (id) => charIds[id] || null
 
 const transform = (id, i) => ({
   id,

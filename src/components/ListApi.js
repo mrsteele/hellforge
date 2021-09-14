@@ -1,4 +1,4 @@
-import { Dot, Link } from '@geist-ui/react'
+import { Dot, Link, Spacer } from '@geist-ui/react'
 
 const ListApi = ({ items }) => (
   <>
@@ -11,7 +11,10 @@ const ListApi = ({ items }) => (
         </>
       )}
       {item.items?.length > 0 && (
-        <ListApi {...item} />
+        <>
+          <ListApi noPadding {...item} />
+          <Spacer />
+        </>
       )}
     </Dot>
   ))}
