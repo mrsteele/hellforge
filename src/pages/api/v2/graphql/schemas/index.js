@@ -46,7 +46,9 @@ export const typeDefs = gql`
     other: UniqueOther
   }
 
+  "Any base item. This model is inherited by every item in the game."
   type ItemType {
+    "A unique identifier."
     id: ID
     name: String
     isRepairable: Boolean
