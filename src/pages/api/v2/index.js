@@ -1,5 +1,3 @@
 export default async function handler(req, res) {
-  res.status(200).json({
-    patch: '1.14d'
-  })
+  res.status(400).json({ error: 'Not Found' })
 }

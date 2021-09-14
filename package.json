@@ -4,6 +4,7 @@
   "description": "A simple api service to fetch information on diablo 2 information",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/compile",
     "build": "next build",
     "export": "next export",
     "start": "next start",
