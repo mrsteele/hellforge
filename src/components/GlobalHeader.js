@@ -2,7 +2,6 @@ import { Divider, Text, Badge, Tabs } from '@geist-ui/react'
 import Container from './Container'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import Logo from '../../public/img/logo-light-transparent.png'
 
 const GlobalHeader = () => {
   const router = useRouter()
@@ -10,7 +9,7 @@ const GlobalHeader = () => {
     <>
       <Container>
         <div style={{display: 'flex', alignItems: 'center'}}>
-          <Image height={50} width={50} src={Logo} alt="D2(R) API Logo" />
+          <Image height={50} width={50} src='/img/logo-red-transparent.png' alt="D2(R) API Logo" />
           <Text h1 style={{marginLeft: '0.25em'}}>
             D2(R) API
             <Badge ml={1} type='error' >alpha</Badge>

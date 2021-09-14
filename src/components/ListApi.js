@@ -1,10 +1,10 @@
-import Link from 'components/Link'
+import { Dot, Link } from '@geist-ui/react'
 
 const ListApi = ({ items }) => (
-  <ul>
+  <>
   {items.map(item => (
-    <li>
-      <a href={`/api${item.path}`} target='_blank'>/api{item.path}</a>
+    <Dot style={{ width: '100%' }} key={item.path}>
+      <Link style={{ textTransform: 'none' }} color icon underline href={`/api${item.path}`} target='_blank'>/api{item.path}</Link>
       {item.page && (
         <>
           {` `}(<Link href={item.path}>Docs</Link>)
@@ -13,9 +13,9 @@ const ListApi = ({ items }) => (
       {item.items?.length > 0 && (
         <ListApi {...item} />
       )}
-    </li>
+    </Dot>
   ))}
-</ul>
+</>
 )
 
 export default ListApi

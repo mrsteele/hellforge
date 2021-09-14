@@ -1,7 +1,7 @@
 import raw from 'lib/raw'
 import ListApi from 'components/ListApi'
 import Markdown from 'components/Markdown'
-import PageMarkdown from 'markdown/v1.md'
+import PageMarkdown from 'mdcontent/v1.md'
 
 const Page = ({ files }) => (
   <div>

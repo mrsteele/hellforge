@@ -1,4 +1,3 @@
-import PageMarkdown from 'markdown/v1.md'
 import MarkdownIt from 'markdown-it'
 const md = new MarkdownIt({
   html: true

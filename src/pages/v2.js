@@ -2,7 +2,7 @@ import ListApi from 'components/ListApi'
 import Model from 'components/Model'
 import fetch from 'lib/fetch'
 import Markdown from 'components/Markdown'
-import PageContent from 'markdown/v2.md'
+import PageContent from 'mdcontent/v2.md'
 // import { typeDefs } from 'pages/api/v2/graphql/schemas'
 
 const models = [{
