@@ -31,7 +31,7 @@ const getTypeType = (type) => {
   return t || null
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const uniqueitems = await fetch('/api/v2/items/unique')
 
   // USE THIS TO DO THE GRAPHQL!

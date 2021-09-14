@@ -12,7 +12,7 @@ const Page = ({ files }) => (
 
 export default Page
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   return {
     props: {
       files: Object.keys(raw).map(r => ({
