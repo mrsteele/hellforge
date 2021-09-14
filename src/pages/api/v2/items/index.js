@@ -7,9 +7,11 @@ export default async function handler(req, res) {
   const armor = await fetch(`/api/v1/armor`)
   const misc = await fetch(`/api/v1/misc`)
 
-  res.status(200).json([
+  const json = [
     ...weapons,
     ...armor,
     ...misc
-  ].map(row => itemify(row)))
+  ].map(row => itemify(row))
+
+  res.status(200).json(json)
 }

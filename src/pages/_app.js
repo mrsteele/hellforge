@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <div className={styles.wrapper}>
       <Head>
-        <script src="https://kit.fontawesome.com/c0cb21dcb7.js" crossorigin="anonymous" />
+        <script src="https://kit.fontawesome.com/c0cb21dcb7.js" crossOrigin="anonymous" />
       </Head>
       <header>
         <div className={`container flex`} style={{justifyContent: 'space-between'}}>
@@ -22,10 +22,10 @@ function MyApp({ Component, pageProps }) {
       </main>
       <footer>
         <div className={styles.social}>
-            <a href='https://github.com/mrsteele/d2api' target='_blank'>
+            <a href='https://github.com/mrsteele/d2api' target='_blank' rel="noreferrer">
               <i className="fab fa-github"></i>
             </a>
-            <a href='https://twitter.com/matt_r_steele' target='_blank'>
+            <a href='https://twitter.com/matt_r_steele' target='_blank' rel="noreferrer">
               <i className="fab fa-twitter"></i>
             </a>
           </div>
@@ -33,17 +33,5 @@ function MyApp({ Component, pageProps }) {
     </div>
   )
 }
-
-// Only uncomment this method if you have blocking data requirements for
-// every single page in your application. This disables the ability to
-// perform automatic static optimization, causing every page in your app to
-// be server-side rendered.
-//
-// MyApp.getInitialProps = async (appContext) => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await App.getInitialProps(appContext);
-//
-//   return { ...appProps }
-// }
 
 export default MyApp

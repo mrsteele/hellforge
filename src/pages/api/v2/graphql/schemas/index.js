@@ -1,6 +1,14 @@
 import {gql} from 'apollo-server-micro'
 
 export const typeDefs = gql`
+  type Query {
+    getUniques: [Unique]
+    getUnique(id: ID!): Unique!
+    getItemTypes: [ItemType]
+    getCharacters: [Character]
+    getCharacter(id: ID!): Character!
+  }
+
   type UniqueColors {
     character: String
     inventory: String
@@ -37,30 +45,50 @@ export const typeDefs = gql`
     sounds: UniqueSounds
     other: UniqueOther
   }
-  
-  type Query {
-    getUniques: [Unique]
-    getUnique(id: ID!): Unique!
-  }
 
-  type Item {
+  type ItemType {
     id: ID
-    type: String # (ring, armor, etc...)
     name: String
-    throwable: Boolean
-    stackable: Boolean - keys, knives, etc...
-    ethereal: Boolean
-    socketable: Boolean
-    lvl: Int
-    defense: Range
-    durability: Range
+    isRepairable: Boolean
+    isWearable: [String]
+    isShootable: Boolean
+    quiver: Boolean
+    isThrowable: Boolean
+    isStackable: Boolean
+    autoReloads: Boolean
+    autoStacks: Boolean
+    sockets: [Int]
+    isInTreasureClass: Boolean
+    characterMods: Character
+    useSpecialCostFormula: Boolean
+    classSpecific: Character
+    inventoryGraphics: [String]
+    storePage: String
   }
 
-  type Weapon implements Item {
-
+  type CharacterStats {
+    str: Int
+    dex: Int
+    int: Int
+    vit: Int
   }
 
-  type Armor implements Item {
-
+  type Character {
+    id: ID
+    name: String
+    stats: CharacterStats
+    stamina: Int
   }
 `
+
+const transform = (i) => ({
+  id: ids[i.class],
+  stats: {
+    str: i.str,
+    dex: i.dex,
+    int: i.int,
+    vit: i.vit
+  },
+  stamina: i.stamina
+  // TODO: FINISH!
+})
