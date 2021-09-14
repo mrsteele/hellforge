@@ -1,4 +1,4 @@
-import fetch from 'lib/fetch'
+import createEntryPointHandler from "lib/createEntryPoint"
 
 const clean = (arr = []) => ([...new Set(arr.filter(a => !a))])
 
@@ -6,8 +6,8 @@ const getBodyLocale = (l) => l || null
 
 const getClass = (id) => id || null
 
-const transform = (i) => ({
-  id: i.Code,
+const transform = (id, i) => ({
+  id,
   name: i.ItemType,
   // parents: clean([i.Equiv1, i.Equiv2]),
   isRepairable: i.Repair === 1,
@@ -49,15 +49,4 @@ const transform = (i) => ({
   storePage: i.StorePage
 })
 
-const resolve = (items = []) => {
-  // iterate over everyone and look for parents...
-  // if a parent is found, spread over it maybe?
-  return items
-}
-
-export default async function handler(req, res) {
-  // all items
-  const data = await fetch(`/api/v1/itemtypes`)
-
-  res.status(200).json(resolve(Object.keys(data).map(transform)))
-}
+export default createEntryPointHandler('itemtypes', transform)
