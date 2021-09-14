@@ -22,8 +22,6 @@ import raw from 'lib/compileTxt'
 export default async function handler(req, res) {
   const { file } = req.query
 
-  console.log('Object.keys', Object.keys(raw))
-
   try {
     const data = raw[file]
     res.status(200).json(data)

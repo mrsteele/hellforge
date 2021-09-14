@@ -68,7 +68,7 @@
    'null': true,
  };
  
- files.forEach(fn => {
+ files.forEach(filename => {
    let data = fs.readFileSync(inDir + fn + '.txt').toString().split(lineEnd);
    let header = data.shift().split(fieldEnd);
    let indexColumn = header.indexOf(indexes[fn]);

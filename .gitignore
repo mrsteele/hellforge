@@ -82,6 +82,7 @@ typings/
 .nuxt
 dist
 out
+src/raw.json
 
 # Gatsby files
 .cache/
