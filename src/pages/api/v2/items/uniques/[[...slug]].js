@@ -21,7 +21,7 @@ export const transform = (row) => ({
   type: row.code, // TODO: Map this to Weapons.txt, Armor.txt and Misc.txt
   // ALSO TODO: Maybe make an `/api/items` endpoint, then `/api/items/armor` and so on
   onlyCarryOne: !!row.carry1,
-  price: (row['cost mult'] * 10) + row['cost add'], // TODO: Make this actually look up the price...
+  price: 10, // (row['cost mult'] * 10) + row['cost add'], // TODO: Make this actually look up the price...
   colorCharacter: row.chrtransform,
   colorInventory: row.invtransform,
   gfxGround: row.flippyfile,

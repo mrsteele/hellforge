@@ -4,4 +4,15 @@ const request = async (path) => {
   return file
 }
 
+export const graphql = async (path, query) => {
+  return fetch(path, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: JSON.stringify({ query })
+  }).then(res => res.json())
+}
+
 export default request

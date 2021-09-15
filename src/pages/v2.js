@@ -1,17 +1,17 @@
 import ListApi from 'components/ListApi'
-import Model from 'components/Model'
 import Markdown from 'components/Markdown'
 import PageContent from 'mdcontent/v2.md'
 import { typeDefs } from 'pages/api/v2/graphql/schemas'
 import { convertTypesToModels } from 'lib/transforms'
 import { Text } from '@geist-ui/react'
+import Docs from 'components/Docs'
 
 const Page = ({ files, types }) => (
   <div>
     <Markdown>{PageContent}</Markdown>
 
     <Text h3>GraphQL Types</Text>
-    {types.map(type => <Model key={type.name} {...type} />)}
+    <Docs types={types} graphqEndpoint='/api/v2/graphql' />
 
     <h3>REST Routes</h3>
     <ListApi items={files} />
@@ -22,43 +22,10 @@ const Page = ({ files, types }) => (
 export default Page
 
 export async function getStaticProps(context) {
-  // const uniqueitems = await fetch('/api/v2/items/unique')
-  // const itemtypes = await fetch('/api/v2/items/types')
-  // const characters = await fetch('/api/v2/characters')
-
-  // USE THIS TO DO THE GRAPHQL!
-  // console.log('typeDefs', typeDefs.definitions)
-
-  // console.log('TEST', typeDefs.definitions[1])
-  // console.log('getType', getTypeType(typeDefs.definitions[0].fields[0].type))
-
-  const types = convertTypesToModels(typeDefs)
-  
-  /*
-typeDefs [ { kind: 'ObjectTypeDefinition',
-    description: undefined,
-    name: { kind: 'Name', value: 'Query' },
-    interfaces: [],
-    directives: [],
-    fields: [ [Object], [Object], [Object], [Object], [Object] ] },
-  { kind: 'ObjectTypeDefinition',
-    description: undefined,
-    name: { kind: 'Name', value: 'UniqueColors' },
-    interfaces: [],
-    directives: [],
-    fields: [ [Object], [Object] ] },
-  { kind: 'ObjectTypeDefinition',
-    description: undefined,
-    name: { kind: 'Name', value: 'UniqueGraphics' },
-    interfaces: [],
-    directives: [],
-    fields: [ [Object], [Object] ] },
-  */
-
   return {
     props: {
       title: 'v2 API',
-      types,
+      types: convertTypesToModels(typeDefs),
       files: [{
         path: '/v2/items/uniques'
       }, {
