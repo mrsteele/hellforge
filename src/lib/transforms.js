@@ -22,7 +22,7 @@ const getTypeType = (type) => {
 }
 
 export const convertTypesToModels = (typeDefs) => {
-  const types = typeDefs.definitions.reduce((all, type) => {
+  return typeDefs.definitions.reduce((all, type, idx) => {
     // console.log(getTypeType(type.fields.map(field => field.type)).filter(field => field.toString() !== field))
     all.push({
       description: getTypeDescription(type.description),
@@ -30,12 +30,10 @@ export const convertTypesToModels = (typeDefs) => {
       fields: type.fields.map(field => ({
         name: field.name.value,
         description: getTypeDescription(field.description),
-        type: getTypeType(field.type)
+        type: idx === 0 ? field.type.type.name.value : getTypeType(field.type)
       }))
     })
   
     return all
   }, [])
-
-  return types
 }
