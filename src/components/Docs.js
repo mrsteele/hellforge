@@ -38,6 +38,9 @@ const Docs = ({ types, graphqEndpoint }) => {
   const startRequest = async () => {
     setLoading(true)
     const data = await graphql(graphqEndpoint, textarea)
+    // if (data.error) {
+    //   setResults('An error occurred, be sure ')
+    // }
     setResults(JSON.stringify(data, null, 2))
     setLoading(false)
   }
