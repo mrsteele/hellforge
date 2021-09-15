@@ -9,7 +9,6 @@
 // }
 
 import createEntryPointHandler from "lib/createEntryPoint"
-import { colorCodeTable } from 'lib/lookups'
 
 export const transform = (row) => ({
   name: row.index,
@@ -23,8 +22,8 @@ export const transform = (row) => ({
   // ALSO TODO: Maybe make an `/api/items` endpoint, then `/api/items/armor` and so on
   playerCanHoldMoreThanOne: !!row.carry1,
   price: (row['cost mult'] * 10) + row['cost add'], // TODO: Make this actually look up the price...
-  colorCharacter: colorCodeTable[row.chrtransform],
-  colorInventory: colorCodeTable[row.invtransform],
+  colorCharacter: row.chrtransform,
+  colorInventory: row.invtransform,
   gfxGround: row.flippyfile,
   gfxInventory: row.invfile,
   soundDrop: row.dropsound,

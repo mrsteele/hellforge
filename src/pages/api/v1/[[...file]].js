@@ -15,7 +15,7 @@ export default async function handler(req, res) {
 
   try {
     const data = raw[file]
-    const ret = id ? data[id] : data
+    const ret = id ? data[id] : Object.keys(data).map(key => ({id: key, ...data[key]}))
     return res.status(200).json(ret)
   } catch (err) {
     console.log('err', err)

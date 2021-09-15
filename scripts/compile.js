@@ -17,6 +17,7 @@
  const indexes = {
    armor: 'code',
    ArmType: 'Token',
+   colors: 'Code',
    charstats: 'class',
    difficultylevels: 'Name',
    ElemTypes: 'Code',
@@ -57,7 +58,24 @@
    TreasureClass: 'Treasure Class',
    TreasureClassEx: 'Treasure Class',
    weapons: 'code',
-   WeaponClass: 'Code'
+   WeaponClass: 'Code',
+   Composit: 'Token',
+   HitClass: 'Code',
+   MonProp: 'Id',
+   // ObjType: 'Token',
+   // belts: 'name',
+   bodylocs: 'Code',
+   books: 'BookSpellCode',
+   compcode: 'code',
+   cubemod: 'Code',
+   cubetype: 'Code',
+   events: 'event',
+   gamble: 'code',
+   hiredesc: 'Code',
+   misscalc: 'code',
+   monsounds: 'Id',
+   monumod: 'uniquemod',
+
  }
  
  const filterValues = {

@@ -1,7 +1,7 @@
 import createEntryPointHandler from "lib/createEntryPoint"
 import { charIdsFromCode } from 'lib/lookups'
 
-const clean = (arr = []) => ([...new Set(arr.filter(a => !a))])
+const clean = (arr = []) => ([...new Set(arr.filter(a => a))])
 
 const getBodyLocale = (l) => l || null
 
@@ -9,10 +9,10 @@ const transform = (i) => ({
   name: i.ItemType,
   // parents: clean([i.Equiv1, i.Equiv2]),
   isRepairable: i.Repair === 1,
-  isWearable: i.Body === 1 ? clean([
-    getBodyLocale(i.BodyLoc1),
-    getBodyLocale(i.BodyLoc2)
-  ]) : [],
+  isWearable: clean([
+    i.BodyLoc1,
+    i.BodyLoc2
+  ]),
   isShootable: i.Shoots === 1, // knives
   quiver: i.Quiver === 1,
   isThrowable: i.Throwable === 1,

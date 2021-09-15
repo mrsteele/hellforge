@@ -83,6 +83,7 @@ const getTypes = () => {
     const sample = Object.values(rawSimplified[Type.toLowerCase()])[0]
 
     const ret = `type ${Type} {
+      id: ID!
       ${Object.keys(sample).map(key => `
       ${key}: ${getTypeFromField(sample[key])}`).join('')}
     }
@@ -114,7 +115,10 @@ type Query {
 `
 
 const Query = Object.keys(rawSimplified).map(capitalize).reduce((all, r) => {
-  all[`get${r}s`] = () => Object.values(rawSimplified[r.toLowerCase()])
+  all[`get${r}s`] = () => {
+    const allData = Object.keys(rawSimplified[r.toLowerCase()])
+    allData.map(key => ({id: key, ...allData}))
+  }
   all[`get${r}`] = (_, args) => rawSimplified[r][args.id]
   return all
 }, {})
