@@ -55,6 +55,9 @@ const nonCompatible = [
   'weapons' // spaces
 ]
 
+const singularize = (str) => str[str.length - 1] === 's' ? str.substring(0, str.length - 1) : str
+// const pluralize = (str) => str[str.length - 1] === 's' ? str : (str + 's')
+
 const rawSimplified = Object.keys(raw).filter(key => nonCompatible.indexOf(key) === -1).reduce((all, key) => {
   all[key] = raw[key]
   return all
@@ -74,8 +77,8 @@ const getTypeFromField = (value) => {
 
 const getQueries = () => `
   ${Object.keys(rawSimplified).map(capitalize).map(key => `
-  get${key}s: [${key}]
-  get${key} (id: String!): ${key}!`).join('\n')}`
+  get${singularize(key)}s: [${key}]
+  get${singularize(key)} (id: String!): ${key}!`).join('\n')}`
 
 const getTypes = () => {
 
@@ -115,11 +118,11 @@ type Query {
 `
 
 const Query = Object.keys(rawSimplified).map(capitalize).reduce((all, r) => {
-  all[`get${r}s`] = () => {
-    const allData = Object.keys(rawSimplified[r.toLowerCase()])
-    allData.map(key => ({id: key, ...allData}))
-  }
-  all[`get${r}`] = (_, args) => rawSimplified[r][args.id]
+  all[`get${singularize(r)}s`] = () => {
+    const allKeys = Object.keys(rawSimplified[r.toLowerCase()])
+    return allKeys.map(key => ({id: key, ...rawSimplified[r.toLowerCase()][key]}))
+  },
+  all[`get${singularize(r)}`] = (_, args) => rawSimplified[r.toLowerCase()][args.id]
   return all
 }, {})
 
