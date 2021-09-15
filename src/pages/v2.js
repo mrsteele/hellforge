@@ -21,7 +21,7 @@ const Page = ({ files, types }) => (
 
 export default Page
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   // const uniqueitems = await fetch('/api/v2/items/unique')
   // const itemtypes = await fetch('/api/v2/items/types')
   // const characters = await fetch('/api/v2/characters')
@@ -57,6 +57,7 @@ typeDefs [ { kind: 'ObjectTypeDefinition',
 
   return {
     props: {
+      title: 'v2 API',
       types,
       files: [{
         path: '/v2/items/uniques'

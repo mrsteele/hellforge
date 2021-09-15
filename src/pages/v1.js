@@ -21,12 +21,13 @@ const Page = ({ files, types }) => (
 
 export default Page
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
 
   const types = convertTypesToModels(typeDefs)
   
   return {
     props: {
+      title: 'v1 API',
       types,
       files: Object.keys(raw).map(r => ({
         path: `/v1/${r}`
