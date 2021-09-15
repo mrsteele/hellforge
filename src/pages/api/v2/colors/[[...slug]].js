@@ -1,21 +1,16 @@
 import createEntryPointHandler from "lib/createEntryPoint"
 
 const transform = (i) => ({
-  name: i.class,
-  str: i.str,
-  dex: i.dex,
-  int: i.int,
-  vit: i.vit,
-  stamina: i.stamina
-  // TODO: FINISH!
+  code: i.Code,
+  name: i['Transform Color']
 })
 
-export default createEntryPointHandler('charstats', transform)
+export default createEntryPointHandler('colors', transform)
 
 
 // export default async function handler(req, res) {
 //   // all items
-//   const data = raw.charstats
+//   const data = raw.colors
 //   res.status(200).json(data)
 
 //   // res.status(200).json(data.map(transform))

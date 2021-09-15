@@ -5,28 +5,17 @@ export const typeDefs = gql`
     getUniques: [Unique]
     getUnique(id: ID!): Unique!
     getItemTypes: [ItemType]
+    getItemType(id: ID!): ItemType!
     getCharacters: [Character]
     getCharacter(id: ID!): Character!
+    getColors: [Color]
+    getColor(id: ID!): Color!
   }
 
-  type UniqueColors {
-    character: String
-    inventory: String
-  }
-
-  type UniqueGraphics {
-    ground: String
-    inventory: String
-  }
-
-  type UniqueSounds {
-    drop: String
-    dropframe: Int
-    use: String
-  }
-
-  type UniqueOther {
-    Rarity: String
+  type Color {
+    id: ID
+    name: String
+    code: String
   }
 
   type Unique {
@@ -40,10 +29,14 @@ export const typeDefs = gql`
     type: String
     playerCanHoldMoreThanOne: Boolean
     price: Int
-    colors: UniqueColors
-    graphics: UniqueGraphics
-    sounds: UniqueSounds
-    other: UniqueOther
+    colorCharacter: Color
+    colorInventory: Color
+    gfxGround: String
+    gfxInventory: String
+    soundDrop: String
+    soundDropframe: Int
+    soundUse: String
+    Rarity: String
   }
 
   "Any base item. This model is inherited by every item in the game."
@@ -68,29 +61,13 @@ export const typeDefs = gql`
     storePage: String
   }
 
-  type CharacterStats {
+  type Character {
+    id: ID
+    name: String
     str: Int
     dex: Int
     int: Int
     vit: Int
-  }
-
-  type Character {
-    id: ID
-    name: String
-    stats: CharacterStats
     stamina: Int
   }
 `
-
-const transform = (i) => ({
-  id: ids[i.class],
-  stats: {
-    str: i.str,
-    dex: i.dex,
-    int: i.int,
-    vit: i.vit
-  },
-  stamina: i.stamina
-  // TODO: FINISH!
-})

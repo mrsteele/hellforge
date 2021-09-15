@@ -1,26 +1,22 @@
-import fetch from 'lib/fetch'
+import apiCharacters from 'pages/api/v2/characters/[[...slug]]'
+import apiItemTypes from 'pages/api/v2/items/types/[[...slug]]'
+import apiItemUniques from 'pages/api/v2/items/uniques/[[...slug]]'
+import apiGetColors from 'pages/api/v2/colors/[[...slug]]'
 
-const getUniques = async () =>
-  await fetch(`/api/v2/items/unique`)
+const getUniques = () => apiItemUniques.getAll()
+const getUnique = (_, args) => apiItemUniques.get(args.id)
 
-const getUnique = async (_, args) =>
-  await fetch(`/api/v2/items/unique/${args.id}`)
+const getItemTypes = () => apiItemTypes.getAll()
+const getItemType = (_, args) => apiItemTypes.get(args.id)
 
-const getItemTypes = async () =>
-  await fetch(`/api/v2/items/types`)
+const getCharacters = () => apiCharacters.getAll()
+const getCharacter = (_, args) => apiCharacters.get(args.id)
 
-const getCharacters = async () =>
-  await fetch(`/api/v2/characters`)
+const getColors = () => apiGetColors.getAll()
+const getColor = (_, args) => apiGetColors.get(args.id)
 
-const getCharacter = async (_, args) =>
-  await fetch(`/api/v2/characters/${args.id}`)
-
-const createHandler = async (allData, field, fn) => {
-  if (!allData[field]) {
-    return null
-  }
-  const data = await fn(null, { id: allData[field] })
-  return data
+const createHandler = (fn, field) => {
+  return (data) => data[field] ? fn(data[field]) : null
 }
 
 export const resolvers = {
@@ -29,11 +25,14 @@ export const resolvers = {
     getUnique,
     getItemTypes,
     getCharacters,
-    getCharacter
+    getCharacter,
+    getItemType,
+    getColors,
+    getColor
   },
 
   ItemType: {
-    classSpecific: async (data) => await createHandler(data, 'classSpecific', getCharacter),
-    characterMods: async (data) => await createHandler(data, 'characterMods', getCharacter)
+    classSpecific: createHandler(apiCharacters.get, 'classSpecific'),
+    characterMods: createHandler(apiCharacters.get, 'characterMods')
   }
 }

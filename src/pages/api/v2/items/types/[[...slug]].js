@@ -1,26 +1,11 @@
 import createEntryPointHandler from "lib/createEntryPoint"
+import { charIdsFromCode } from 'lib/lookups'
 
 const clean = (arr = []) => ([...new Set(arr.filter(a => !a))])
 
 const getBodyLocale = (l) => l || null
 
-
-// character ids
-const charIds = {
-  ama: 'Amazon',
-  bar: 'Barbarian',
-  nec: 'Necromancer',
-  pal: 'Paladin',
-  sor: 'Sorceress',
-  ass: 'Assassin',
-  dru: 'Druid',
-  '': 'Expansion'
-}
-
-const getClass = (id) => charIds[id] || null
-
-const transform = (id, i) => ({
-  id,
+const transform = (i) => ({
   name: i.ItemType,
   // parents: clean([i.Equiv1, i.Equiv2]),
   isRepairable: i.Repair === 1,
@@ -47,9 +32,9 @@ const transform = (id, i) => ({
     i.MaxSock40
   ],
   isInTreasureClass: i.TreasureClass === 1,
-  characterMods: getClass(i.StaffMods),
+  characterMods: charIdsFromCode[i.StaffMods],
   useSpecialCostFormula: i.CostFormula === 1,
-  classSpecific: getClass(i.Class),
+  classSpecific: charIdsFromCode[i.Class],
   // inventoryImageVariantsCount: i.VarInvGfx || 0,
   inventoryGraphics: clean([
     i.InvGfx1,

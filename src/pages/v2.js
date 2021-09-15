@@ -1,17 +1,19 @@
 import ListApi from 'components/ListApi'
 import Model from 'components/Model'
-import fetch from 'lib/fetch'
 import Markdown from 'components/Markdown'
 import PageContent from 'mdcontent/v2.md'
 import { typeDefs } from 'pages/api/v2/graphql/schemas'
+import { convertTypesToModels } from 'lib/transforms'
+import { Text } from '@geist-ui/react'
 
 const Page = ({ files, types }) => (
   <div>
     <Markdown>{PageContent}</Markdown>
 
+    <Text h3>GraphQL Types</Text>
     {types.map(type => <Model key={type.name} {...type} />)}
 
-    <h3>Routes</h3>
+    <h3>REST Routes</h3>
     <ListApi items={files} />
 
   </div>
@@ -19,22 +21,10 @@ const Page = ({ files, types }) => (
 
 export default Page
 
-// HELPERS
-const getTypeDescription = (description) => description?.value || null
-const getTypeType = (type) => {
-  const t = type?.name?.value
-
-  if (t?.kind === 'ObjectTypeDefinition') {
-    return t.name.value
-  }
-
-  return t || null
-}
-
 export async function getServerSideProps(context) {
-  const uniqueitems = await fetch('/api/v2/items/unique')
-  const itemtypes = await fetch('/api/v2/items/types')
-  const characters = await fetch('/api/v2/characters')
+  // const uniqueitems = await fetch('/api/v2/items/unique')
+  // const itemtypes = await fetch('/api/v2/items/types')
+  // const characters = await fetch('/api/v2/characters')
 
   // USE THIS TO DO THE GRAPHQL!
   // console.log('typeDefs', typeDefs.definitions)
@@ -42,20 +32,7 @@ export async function getServerSideProps(context) {
   // console.log('TEST', typeDefs.definitions[1])
   // console.log('getType', getTypeType(typeDefs.definitions[0].fields[0].type))
 
-  const types = typeDefs.definitions.reduce((all, type) => {
-    // console.log(getTypeType(type.fields.map(field => field.type)).filter(field => field.toString() !== field))
-    all.push({
-      description: getTypeDescription(type.description),
-      name: type.name.value,
-      fields: type.fields.map(field => ({
-        name: field.name.value,
-        description: getTypeDescription(field.description),
-        type: getTypeType(field.type)
-      }))
-    })
-
-    return all
-  }, [])
+  const types = convertTypesToModels(typeDefs)
   
   /*
 typeDefs [ { kind: 'ObjectTypeDefinition',
@@ -82,20 +59,11 @@ typeDefs [ { kind: 'ObjectTypeDefinition',
     props: {
       types,
       files: [{
-        path: '/v2/items/unique',
-        items: uniqueitems.map(item => ({
-          path: `/v2/items/unique/${item.id}`
-        }))
+        path: '/v2/items/uniques'
       }, {
-        path: '/v2/items/types',
-        items: itemtypes.map(item => ({
-          path: `/v2/items/types/${item.id}`
-        }))
+        path: '/v2/items/types'
       }, {
-        path: '/v2/characters',
-        items: characters.map(char => ({
-          path: `/v2/characters/${char.id}`
-        }))
+        path: '/v2/characters'
       }]
     }, // will be passed to the page component as props
   }

@@ -57,8 +57,8 @@
    TreasureClass: 'Treasure Class',
    TreasureClassEx: 'Treasure Class',
    weapons: 'code',
-   WeaponClass: 'Code',
- };
+   WeaponClass: 'Code'
+ }
  
  const filterValues = {
    '': true,
