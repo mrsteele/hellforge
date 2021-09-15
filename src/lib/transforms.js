@@ -9,6 +9,7 @@ export const itemify = (old) => {
   }
 }
 
+
 // HELPERS
 const getTypeDescription = (description) => description?.value || null
 const getTypeType = (type) => {
@@ -23,6 +24,10 @@ const getTypeType = (type) => {
 
 export const convertTypesToModels = (typeDefs) => {
   return typeDefs.definitions.reduce((all, type, idx) => {
+    if (idx === 0) {
+      console.log('AAAAAAAAAA', type.fields[0])
+      console.log('AAAAAAAAAA', type.fields[1])
+    }
     // console.log(getTypeType(type.fields.map(field => field.type)).filter(field => field.toString() !== field))
     all.push({
       description: getTypeDescription(type.description),
@@ -30,7 +35,8 @@ export const convertTypesToModels = (typeDefs) => {
       fields: type.fields.map(field => ({
         name: field.name.value,
         description: getTypeDescription(field.description),
-        type: idx === 0 ? field.type.type.name.value : getTypeType(field.type)
+        type: idx === 0 ? field.type.type.name.value : getTypeType(field.type),
+        manyResults: field.type.kind === 'ListType'
       }))
     })
   
