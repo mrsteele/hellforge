@@ -31,12 +31,12 @@ const transform = (i) => ({
     i.MaxSock25,
     i.MaxSock40
   ],
-  isInTreasureClass: i.TreasureClass === 1,
+  inTreasureClass: i.TreasureClass === 1,
   characterMods: charIdsFromCode[i.StaffMods],
-  useSpecialCostFormula: i.CostFormula === 1,
+  useCostFormula: i.CostFormula === 1,
   classSpecific: charIdsFromCode[i.Class],
   // inventoryImageVariantsCount: i.VarInvGfx || 0,
-  inventoryGraphics: clean([
+  inventoryGfx: clean([
     i.InvGfx1,
     i.InvGfx2,
     i.InvGfx3,

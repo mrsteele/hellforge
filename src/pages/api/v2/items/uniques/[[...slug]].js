@@ -14,13 +14,13 @@ export const transform = (row) => ({
   name: row.index,
   availability: row.version,
   // enabled?
-  availableOnLadder: row.ladder === 1,
-  canDropMoreThanOncePerGame: !!row.nolimit,
+  ladderOnly: row.ladder === 1,
+  dropOnce: !row.nolimit,
   itemLvl: row.lvl || null,
   requiredLevel: row["lvl req"] || null,
   type: row.code, // TODO: Map this to Weapons.txt, Armor.txt and Misc.txt
   // ALSO TODO: Maybe make an `/api/items` endpoint, then `/api/items/armor` and so on
-  playerCanHoldMoreThanOne: !!row.carry1,
+  onlyCarryOne: !!row.carry1,
   price: (row['cost mult'] * 10) + row['cost add'], // TODO: Make this actually look up the price...
   colorCharacter: row.chrtransform,
   colorInventory: row.invtransform,

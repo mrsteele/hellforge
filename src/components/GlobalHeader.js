@@ -10,7 +10,7 @@ const GlobalHeader = () => {
       <Container>
         <div style={{display: 'flex', alignItems: 'center'}}>
           <Image height={50} width={50} src='/img/logo-red-transparent.png' alt="D2(R) API Logo" />
-          <Text h1 style={{marginLeft: '0.25em'}}>
+          <Text style={{ fontSize: '1.75em', margin: '0 0.5em 0 0.5em' }}>
             D2(R) API
             <Badge ml={1} type='error' >alpha</Badge>
           </Text>
