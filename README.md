@@ -1,4 +1,4 @@
-# d2api
+# Hellforge API
 
 This is an example, but useful for experimentation.
 
