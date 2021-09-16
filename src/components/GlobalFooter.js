@@ -8,7 +8,7 @@ const GlobalFooter = () => (
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Text type='secondary' mr={3} small>Copyright &copy; {new Date().getFullYear()} Matthew Steele.</Text>
         <div>
-          <Link href='https://github.com/mrsteele/d2api' target='_blank' rel="noreferrer">
+          <Link href='https://github.com/mrsteele/hellforge' target='_blank' rel="noreferrer">
             <i className="fab fa-github"></i>
           </Link>
           <Link ml={1} href='https://twitter.com/matt_r_steele' target='_blank' rel="noreferrer">

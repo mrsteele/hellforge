@@ -45,7 +45,7 @@ const Model = ({ name, description, route, fields, query }) => {
       {route && (
         <>
           <Text h5>Endpoint</Text>
-          <Snippet symbol='' mb={2} text={`https://d2api.vercel.com/api/v2${route}`} />
+          <Snippet symbol='' mb={2} text={`https://hellforge.vercel.com/api/v2${route}`} />
         </>
       )}
       <h5>Properties</h5>

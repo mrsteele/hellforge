@@ -4,7 +4,7 @@ import { Note, Text } from '@geist-ui/react'
 
 const Page = () => (
   <>
-    <Text h1>Welcome to the first unnoficial Diablo 2 API!</Text>
+    <Text h1>Welcome to the first unofficial Diablo 2 API!</Text>
     <Text>
       I have been working on creating this service to better centralize all the moving parts of the Diablo 2 database.
       With Diablo 2 Resurrected release on the horizon, I am hopeful that updates can be maintained here and propogated out to other web services.
