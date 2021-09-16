@@ -7,7 +7,7 @@ import GlobalFooter from 'components/GlobalFooter'
 import './global.scss'
 
 function MyApp({ Component, pageProps }) {
-  const title = (pageProps.title || 'Stay a while and listen') + ' - D2(R) API'
+  const title = (pageProps.title || 'Stay a while and listen') + ' - Diablo 2 Hellforge API'
 
   return (
     <GeistProvider themeType='dark'>
