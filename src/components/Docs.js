@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Model from 'components/Model'
-import { Drawer, Textarea, Button } from '@geist-ui/react'
+import { Drawer, Text, Textarea, Button } from '@geist-ui/react'
 import { graphql } from 'lib/fetch'
 
 const safeVals = [
@@ -61,7 +61,10 @@ const Docs = ({ types, graphqEndpoint }) => {
           />
           <Button type='success' width='100%' block loading={loading} onClick={startRequest}>Go!</Button>
           {results && (
-            <Textarea width='100%' height={10} readOnly value={results} />
+            <div style={{maxWidth: '310px'}}>
+              <Text h4>Results</Text>
+              <Textarea width='100%' height={10} readOnly value={results} />
+            </div>
           )}
         </Drawer.Content>
       </Drawer>
