@@ -14,8 +14,8 @@ function MyApp({ Component, pageProps }) {
 
   const isProduction = process.env.NODE_ENV === 'production'
 
-  if (isProduction) {
-    useEffect(() => {
+  useEffect(() => {
+    if (isProduction) {
       const handleRouteChange = (url) => {
         window.gtag('config', process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS, {
           page_path: url,
@@ -30,8 +30,8 @@ function MyApp({ Component, pageProps }) {
       return () => {
         router.events.off('routeChangeComplete', handleRouteChange)
       }
-    }, [router.events])
-  }
+    }
+  }, [router.events])
 
   return (
     <GeistProvider themeType='dark'>
