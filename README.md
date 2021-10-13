@@ -8,7 +8,7 @@ To get the most accurate information, we use data from the actua game files. The
 
 ### Live Site
 
-This site is hosted in its entirety at https://hellforge.vercel.com.
+This site is hosted in its entirety at https://hellforge.vercel.app.
 
 ### API Resources
 
